@@ -2,6 +2,7 @@ group 'com.example.serial_communication'
 version '1.0'
 
 buildscript {
+    ext.kotlin_version = '1.8.0'
     repositories {
         google()
         mavenCentral()
@@ -9,6 +10,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -19,17 +21,20 @@ rootProject.allprojects {
     }
 }
 
+
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_9
-        targetCompatibility JavaVersion.VERSION_1_9
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
     }
-
     defaultConfig {
         minSdkVersion 16
+
+        consumerProguardFiles 'consumer-rules.pro'
     }
 }
